@@ -1,0 +1,4 @@
+CONFIG_ARCH	= ARCH_ARMV7_A
+CONFIG_WORDSIZE	= 4
+
+CFLAGS	+= -march=armv7-a

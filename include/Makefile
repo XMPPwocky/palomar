@@ -1,0 +1,1 @@
+INCLUDEPATHS	+= -I $($(CURDIR_PTR))
