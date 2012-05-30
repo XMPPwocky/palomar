@@ -30,11 +30,11 @@ PURPLECOLOR	= \x1b[35;01m
 CYANCOLOR	= \x1b[36;01m
 NOCOLOR		= \x1b[0m
 
-rm_msg		= $(ECHO) -e "$(REDCOLOR)[RM]$(NOCOLOR)	$1"
+rm_msg		= $(ECHO) -e "$(REDCOLOR)[RM]$(NOCOLOR)		$1"
 generate_msg	= $(ECHO) -e "$(BLUECOLOR)[GENERATE]$(NOCOLOR)	$1"
-ld_msg	= $(ECHO) -e "$(YELLOWCOLOR)[LD]$(NOCOLOR)	$1 -> $2"
-cc_msg	= $(ECHO) -e "$(GREENCOLOR)[CC]$(NOCOLOR)	$1 -> $2"
-as_msg	= $(ECHO) -e "$(CYANCOLOR)[AS]$(NOCOLOR)	$1 -> $2"
+ld_msg	= $(ECHO) -e "$(YELLOWCOLOR)[LD]$(NOCOLOR)		$1 -> $2"
+cc_msg	= $(ECHO) -e "$(GREENCOLOR)[CC]$(NOCOLOR)		$1 -> $2"
+as_msg	= $(ECHO) -e "$(CYANCOLOR)[AS]$(NOCOLOR)		$1 -> $2"
 objcopy_msg = $(ECHO) -e "$(PURPLECOLOR)[OBJCOPY]$(NOCOLOR)	$1 -> $2"
 
 .DEFAULT_GOAL	= $(BUILDDIR)/binaries/kernel.bin
