@@ -1,6 +1,6 @@
 .PHONY: clean
 
-BUILDDIR	:= $($(CURDIR_PTR))
+BUILDDIR	:= $(CURDIR)
 
 clean:
 	@for FILE in `$(FIND) $(BUILDDIR) -type f ! -name Makefile`; do \
@@ -9,4 +9,5 @@ clean:
 		done;
 
 $(call recurse,$(BUILDDIR)/config)
+$(call recurse,$(BUILDDIR)/objects)
 $(call recurse,$(BUILDDIR)/binaries)

@@ -1,4 +1,4 @@
-SRCDIR	= $($(CURDIR_PTR))
+SRCDIR	:= $(CURDIR)
 
 SOURCEFILES	:=
 

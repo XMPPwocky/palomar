@@ -1,3 +1,3 @@
-CONFIGDIR	:= $($(CURDIR_PTR))
+CONFIGDIR	:= $(CURDIR)
 
 $(foreach cfg,$(CONFIGS),$(call recurse,$(CONFIGDIR)/$(cfg)))
