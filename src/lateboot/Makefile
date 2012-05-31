@@ -1,1 +1,0 @@
-SOURCEFILES	+= $(wildcard $(CURDIR)/*.c)

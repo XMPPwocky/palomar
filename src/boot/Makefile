@@ -1,0 +1,6 @@
+BOOTSRCDIR := $(CURDIR)
+
+SOURCEFILES	+= $(wildcard $(BOOTSRCDIR)/*.c)
+SOURCEFILES	+= $(wildcard $(BOOTSRCDIR)/*.s)
+
+$(BOOTSRCDIR)/%:	CFLAGS += -fPIC

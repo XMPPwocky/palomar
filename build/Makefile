@@ -1,11 +1,17 @@
-.PHONY: clean
+.PHONY: clean distclean
 
 BUILDDIR	:= $(CURDIR)
 
-clean:
-	@for FILE in `$(FIND) $(BUILDDIR) -type f ! -name Makefile`; do \
+distclean:	clean
+	@for FILE in $(DISTCLEANABLES); do \
 		$(call rm_msg,$$FILE); \
-		$(RM) $$FILE; \
+		$(RM) -f $$FILE; \
+		done;
+	
+clean:
+	@for FILE in $(CLEANABLES); do \
+		$(call rm_msg,$$FILE); \
+		$(RM) -f $$FILE; \
 		done;
 
 $(call recurse,$(BUILDDIR)/config)
