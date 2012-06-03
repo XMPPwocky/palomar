@@ -3,4 +3,4 @@ BOOTSRCDIR := $(CURDIR)
 SOURCEFILES	+= $(wildcard $(BOOTSRCDIR)/*.c)
 SOURCEFILES	+= $(wildcard $(BOOTSRCDIR)/*.s)
 
-$(BOOTSRCDIR)/%:	CFLAGS += -fPIC
+$(BOOTSRCDIR)/%:	private CFLAGS += -fPIC

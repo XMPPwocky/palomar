@@ -3,6 +3,8 @@ ALWAYS_BUILD: ;
 
 INCLUDED_FILES	:=
 
+VERSION	= 0.001
+
 define _recurse =
 ifeq	(,$$(findstring $$1,$$(INCLUDED_FILES)))
 INCLUDEDFILES	+= $$1
@@ -36,5 +38,6 @@ ld_msg	= $(ECHO) -e "$(YELLOWCOLOR)[LD]$(NOCOLOR)		$1 -> $2"
 cc_msg	= $(ECHO) -e "$(GREENCOLOR)[CC]$(NOCOLOR)		$1 -> $2"
 as_msg	= $(ECHO) -e "$(CYANCOLOR)[AS]$(NOCOLOR)		$1 -> $2"
 objcopy_msg = $(ECHO) -e "$(PURPLECOLOR)[OBJCOPY]$(NOCOLOR)	$1 -> $2"
+mkimage_msg = $(ECHO) -e "$(YELLOWCOLOR)[MKIMAGE]$(NOCOLOR)	$1 -> $2"
 
 .DEFAULT_GOAL	= $(BUILDDIR)/binaries/kernel.bin

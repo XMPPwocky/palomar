@@ -1,9 +1,11 @@
 SECTIONS
 {
 	. = 0xB0000000;
-	.text	: { *(.text) }
+	__image_start = .;
+	.text	: { *(.init.text) *(.text) }
 	.data	: { *(.rodata) *(.data) }
 	.bss	: { *(.bss) }
+	__image_size = . - __image_start;
 
 	/* debug section copypasta */
 	.stab          0 : { *(.stab) }

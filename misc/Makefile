@@ -1,5 +1,3 @@
 MISCDIR	:= $(CURDIR)
 
-ifndef LINKERSCRIPT
-LINKERSCRIPT    := $(MISCDIR)/default.ld
-endif
+LINKERSCRIPT    := $(MISCDIR)/link.ld

@@ -13,10 +13,33 @@
 #define	ATAG_VIDEOLFB	0x54410008
 #define	ATAG_CMDLINE	0x54410009
 
-struct atag {
+struct atag_core {
+	uint32_t flags;
+	uint32_t pagesize;
+	uint32_t rootdev;
+};
+struct atag_mem {
 	uint32_t size;
+	uint32_t start;
+};
+struct atag_initrd2 {
+	uint32_t start;
+	uint32_t size;
+};
+struct atag_cmdline {
+	char *cmdline;
+};
+
+struct atag {
+	uint32_t size; /* WORDS, not bytes! */
 	uint32_t type;
+
 	union {
-		/*struct atag_core	core;*/
+		struct atag_core	core;
+		struct atag_mem		mem;
+		struct atag_initrd2	initrd2;
+		struct atag_cmdline	cmdline;
 	} tag;
 };
+
+extern void parse_atags(struct atag *tag);
