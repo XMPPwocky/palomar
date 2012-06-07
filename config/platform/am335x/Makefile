@@ -1,4 +1,3 @@
-$(call recurse,$(CONFIGDIR)/cpu/cortex-a8)
-
 CONFIG_PLATFORM	= PLATFORM_AM335X
-CONFIG_LOAD_ADDRESS	= 0x80008000
+CONFIG_LOAD_ADDRESS	= 0x81000000
+$(call recurse,$(CONFIGDIR)/cpu/cortex-a8)

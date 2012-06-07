@@ -1,3 +1,3 @@
 CONFIGDIR	:= $(CURDIR)
 
-$(foreach cfg,$(CONFIGS),$(call recurse,$(CONFIGDIR)/$(cfg)))
+$(foreach cfg,defaults $(CONFIGS),$(call recurse,$(CONFIGDIR)/$(cfg)))

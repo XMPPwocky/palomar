@@ -13,6 +13,7 @@ clean:
 		$(call rm_msg,$$FILE); \
 		$(RM) -f $$FILE; \
 		done;
+	@$(MAKE) -s --no-print-directory $(BUILDCONFIGDIR)/config.h # Eeew.
 
 $(call recurse,$(BUILDDIR)/config)
 $(call recurse,$(BUILDDIR)/deps)
