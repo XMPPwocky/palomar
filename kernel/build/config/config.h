@@ -1,0 +1,6 @@
+/* This is generated code! Do not modify! */
+#define CONFIG_CPU CPU_CORTEX_A8
+#define CONFIG_LOAD_ADDRESS 0x81000000
+#define CONFIG_PLATFORM PLATFORM_AM335X
+#define CONFIG_WORDSIZE 4
+#define CONFIG_ARCH ARCH_ARMV7_A

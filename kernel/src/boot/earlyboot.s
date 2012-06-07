@@ -9,8 +9,6 @@ _start:
 	adr	r4, _start
 	ldr	r5, =_start
 	sub	r12, r4, r5 /* load address - virtual address, often negative */
-	ldr	r4, =_stack_top
-	add	sp, r4, r12 /* load address of _stack_top */
 	ldr	r4, =atag_ptr
 	str	r2, [r4, r12] /* save atag pointer */
 
@@ -71,9 +69,12 @@ $$zeroed_bss:
 	mcr	p15,0,r0,c1,c0,0 /* write SCTLR */
 	dsb	/* just in case */
 	isb	/* barrier? I 'ardly even know 'er! */
-
-$$foo:	b	$$foo
-
+	
+	ldr	pc, =$$final_address
+$$final_address:
+	/* Hooray! We're running in virtual address space! */
+	bl	boot
+	bkpt	/* boot() should not return */
 
 .section .bss
 .balign 4
