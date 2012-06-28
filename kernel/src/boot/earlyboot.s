@@ -25,17 +25,22 @@ $$zero_bss_loop:
 	b	$$zero_bss_loop
 $$zeroed_bss:
 
-	/* write global translation tables */
+	/* write temporary entries into the global translation tables */
 	/* they're in BSS, so they've already been zeroed */
 	ldr	r0, =global_translation_tables
 	add	r0, r0, r12
 	ldr	r1, =__image_start
 	add	r2, r1, r12
-	ldr	r3, =0b00010001010000000010
+	
+	/* construct translation table entry */
+	ldr	r3, =0b00010001010000000010 
 	orr	r3, r1, r3
 
-	str	r3, [r0, r1, lsr #18]
-	str	r3, [r0, r2, lsr #18] /* identity mapping */
+	add	r1, r0, r1, lsr #18
+	add	r2, r0, r2, lsr #18
+
+	str	r3, [r1] /* the actual higher-half mapping */
+	str	r3, [r2]
 
 	/* now, enable MMU! */
 
@@ -49,7 +54,7 @@ $$zeroed_bss:
 	mcr	p15,0,r0,c2,c0,2 /* write TTBCR */
 
 	mov	r0, #0
-	mcr	p15,0,r0,c13,c0,1 /* ASID 0 */
+	mcr	p15,0,r0,c13,c0,1 /* kernel uses ASID 0*/
 
 	/* http://imgur.com/NRn1f */
 	/* TLBs */
@@ -69,12 +74,31 @@ $$zeroed_bss:
 	mcr	p15,0,r0,c1,c0,0 /* write SCTLR */
 	dsb	/* just in case */
 	isb	/* barrier? I 'ardly even know 'er! */
-	
+
 	ldr	pc, =$$final_address
 $$final_address:
 	/* Hooray! We're running in virtual address space! */
+	cmp	r1, r2 /* is there no separate identity mapping? */
+	beq	$$go_boot
+	mov	r0, #0
+	str	r0, [r2] /* break identity mapping */
+	mcr	p15, 0, r0, c8, c5, 0 /* clear Instruction TLB... */
+	mcr	p15, 0, r0, c7, c5, 0 /* and instruction cache... */
+	dsb
+	isb	/* who's down with dsb? yeah you know me */
+
+$$go_boot:
 	bl	boot
 	bkpt	/* boot() should not return */
+
+$$bail:
+	/* we dun goofed */
+	adr	r1, $$bail_reason /* store the reason we bailed */
+	str	r0, [r1]
+$$bail_infiniteloop:
+	b	$$bail_infiniteloop
+$$bail_reason:
+	.word	0xDEADBEEF
 
 .section .bss
 .balign 4
